@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import formation_sopra.Refuge.dao.IDAOAnimal;
 import formation_sopra.Refuge.model.Animal;
+import formation_sopra.Refuge.model.Views;
 import formation_sopra.Refuge.rest.request.AnimalRequest;
 import formation_sopra.Refuge.rest.response.AnimalResponse;
 
@@ -32,6 +35,7 @@ public class AnimalRestController {
 	}
 
 	@GetMapping("")
+	@JsonView(Views.ViewAnimal.class)
 	public List<AnimalResponse> getAll() {
 		List<Animal> animals = this.daoAnimal.findAll();
 
@@ -39,12 +43,14 @@ public class AnimalRestController {
 	}
 	
 	@GetMapping("/{id}")
+	@JsonView(Views.ViewAnimal.class)
 	public AnimalResponse getById(@PathVariable Integer id) {
 		return this.daoAnimal.findById(id).map(AnimalResponse::convert)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}
 	
 	@PostMapping("")
+	@JsonView(Views.ViewAnimal.class)
 	public Animal create(@RequestBody AnimalRequest animalRequest) {
 		Animal animal = AnimalRequest.convert(animalRequest);
 
@@ -52,6 +58,7 @@ public class AnimalRestController {
 	}
 	
 	@PutMapping("/{id}")
+	@JsonView(Views.ViewAnimal.class)
 	public Animal update(@RequestBody AnimalRequest animalRequest, @PathVariable Integer id) {
 		if (id != animalRequest.getId() || !this.daoAnimal.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
@@ -63,6 +70,7 @@ public class AnimalRestController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@JsonView(Views.ViewAnimal.class)
 	public void delete(@PathVariable Integer id) {
 		if (!this.daoAnimal.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Non trouvé");

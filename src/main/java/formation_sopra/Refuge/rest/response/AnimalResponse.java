@@ -4,14 +4,22 @@ import java.time.LocalDate;
 
 import org.springframework.beans.BeanUtils;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import formation_sopra.Refuge.model.Animal;
+import formation_sopra.Refuge.model.Views;
 
 
 public class AnimalResponse {
+	@JsonView(Views.ViewAnimal.class)
 	private Integer id;
+	@JsonView(Views.ViewAnimal.class)
 	private String nom;
+	@JsonView(Views.ViewAnimal.class)
 	private String race;
+	@JsonView(Views.ViewAnimal.class)
 	private LocalDate naissance;
+	@JsonView(Views.ViewAnimal.class)
 	private String description;
 	
 	public AnimalResponse() {
