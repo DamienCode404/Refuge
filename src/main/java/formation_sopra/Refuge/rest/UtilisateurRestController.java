@@ -16,6 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import formation_sopra.Refuge.dao.IDAOUtilisateur;
 import formation_sopra.Refuge.model.Utilisateur;
+import formation_sopra.Refuge.rest.request.UtilisateurRequest;
+import formation_sopra.Refuge.rest.response.UtilisateurResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -70,15 +72,5 @@ public class UtilisateurRestController {
 		this.daoUtilisateur.deleteById(id);
 	}
 	
-	@PostMapping("/inscriptionStagiaire")
-	public Stagiaire create(@RequestBody @Valid InscriptionStagiaireRequest inscriptionStagiaireRequest, BindingResult result) {
-		if(result.hasErrors()) {
-			String errors = result.getAllErrors().toString(); // Récupération propre des messages d'erreurs à effectuer
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errors);
-		}
-		
-		Stagiaire stagiaire = InscriptionStagiaireRequest.convert(inscriptionStagiaireRequest);
 
-		return daoUtilisateur.save(stagiaire);
-	}
 }
