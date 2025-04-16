@@ -1,5 +1,7 @@
 package formation_sopra.Refuge.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,12 +18,19 @@ import jakarta.persistence.Table;
 public abstract class Utilisateur{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewBasic.class)
 	protected Integer id;
+	@JsonView(Views.ViewBasic.class)
 	protected String login;
+	@JsonView(Views.ViewBasic.class)
 	protected String password;
+	@JsonView(Views.ViewBasic.class)
 	protected String lastName;
+	@JsonView(Views.ViewBasic.class)
 	protected String firstName;
+	@JsonView(Views.ViewBasic.class)
 	protected String email;
+	@JsonView(Views.ViewBasic.class)
 	protected String phoneNumber;
 	
 	public Utilisateur() {}
