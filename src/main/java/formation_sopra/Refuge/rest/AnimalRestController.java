@@ -45,19 +45,19 @@ public class AnimalRestController {
 	}
 	
 	@PostMapping("")
-	public Animal create(@RequestBody AnimalRequest utilisateurRequest) {
-		Animal animal = AnimalRequest.convert(utilisateurRequest);
+	public Animal create(@RequestBody AnimalRequest animalRequest) {
+		Animal animal = AnimalRequest.convert(animalRequest);
 
 		return daoAnimal.save(animal);
 	}
 	
 	@PutMapping("/{id}")
-	public Animal update(@RequestBody AnimalRequest utilisateurRequest, @PathVariable Integer id) {
-		if (id != utilisateurRequest.getId() || !this.daoAnimal.existsById(id)) {
+	public Animal update(@RequestBody AnimalRequest animalRequest, @PathVariable Integer id) {
+		if (id != animalRequest.getId() || !this.daoAnimal.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
 		}
 
-		Animal animal = AnimalRequest.convert(utilisateurRequest);
+		Animal animal = AnimalRequest.convert(animalRequest);
 
 		return daoAnimal.save(animal);
 	}
