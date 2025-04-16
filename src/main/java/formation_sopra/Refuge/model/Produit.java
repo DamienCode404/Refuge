@@ -13,10 +13,15 @@ import jakarta.persistence.Table;
 public class Produit{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewProduit.class)
 	private Integer id;
+	@JsonView(Views.ViewProduit.class)
 	private String libelle;
+	@JsonView(Views.ViewProduit.class)
 	private String description;
+	@JsonView(Views.ViewProduit.class)
 	private Double prix;
+	@JsonView(Views.ViewProduit.class)
 	private Integer stock;
 	
 	public Produit() {}
