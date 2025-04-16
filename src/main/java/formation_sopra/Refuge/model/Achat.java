@@ -2,6 +2,8 @@ package formation_sopra.Refuge.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,9 +15,13 @@ import jakarta.persistence.Table;
 public class Achat{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewBasic.class)
 	private Integer id;
+	@JsonView(Views.ViewBasic.class)
 	private Integer qte;
+	@JsonView(Views.ViewBasic.class)
 	private Double prix;
+	@JsonView(Views.ViewBasic.class)
 	private LocalDate date;
 	
 	public Achat() {}
