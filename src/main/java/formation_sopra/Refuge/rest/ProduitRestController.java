@@ -15,11 +15,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import formation_sopra.Refuge.exception.ProduitService;
 import formation_sopra.Refuge.model.Produit;
 import formation_sopra.Refuge.model.Views;
 import formation_sopra.Refuge.rest.request.ProduitRequest;
 import formation_sopra.Refuge.rest.response.ProduitResponse;
-import formation_sopra.Refuge.service.ProduitService;
 
 @RestController
 @RequestMapping("/produit")

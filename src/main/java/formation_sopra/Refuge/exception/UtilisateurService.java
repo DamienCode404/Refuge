@@ -1,4 +1,4 @@
-package formation_sopra.Refuge.service;
+package formation_sopra.Refuge.exception;
 
 import java.util.List;
 import java.util.Optional;

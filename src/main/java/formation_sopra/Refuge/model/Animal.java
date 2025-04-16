@@ -18,23 +18,16 @@ import jakarta.persistence.Table;
 public class Animal{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonView(Views.ViewBasic.class)
 	private Integer id;
-	@JsonView(Views.ViewBasic.class)
 	private String nom;
-	@JsonView(Views.ViewBasic.class)
 	private String race;
-	@JsonView(Views.ViewBasic.class)
 	private LocalDate naissance;
-	@JsonView(Views.ViewBasic.class)
 	private String description;
 	
 	@Enumerated(EnumType.STRING)
-	@JsonView(Views.ViewBasic.class)
 	private Statut status;
 	
 	@Lob
-	@JsonView(Views.ViewBasic.class)
 	private byte[] image;
 	
 	public Animal() {}
