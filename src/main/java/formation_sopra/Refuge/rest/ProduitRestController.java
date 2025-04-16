@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import formation_sopra.Refuge.model.Produit;
+import formation_sopra.Refuge.model.Views;
 import formation_sopra.Refuge.rest.request.ProduitRequest;
 import formation_sopra.Refuge.rest.response.ProduitResponse;
 import formation_sopra.Refuge.service.ProduitService;
@@ -30,6 +33,7 @@ public class ProduitRestController {
 	}
 
 	@GetMapping("")
+	@JsonView(Views.ViewProduit.class)
 	public List<ProduitResponse> getAll() {
 		List<Produit> produits = this.produitService.findAll();
 		
@@ -39,6 +43,7 @@ public class ProduitRestController {
 	}
 
 	@GetMapping("/{id}")
+	@JsonView(Views.ViewProduit.class)
 	public ProduitResponse getById(@PathVariable Integer id) {
 		Produit produit = this.produitService.findById(id);
 		
@@ -46,12 +51,14 @@ public class ProduitRestController {
 	}
 
 	@PostMapping("")
+	@JsonView(Views.ViewProduit.class)
 	public Produit create(@RequestBody ProduitRequest produitRequest) {
 		Produit produit = ProduitRequest.convert(produitRequest);
 		return this.produitService.create(produit);
 	}
 
 	@PutMapping("/{id}")
+	@JsonView(Views.ViewProduit.class)
 	public Produit update(@RequestBody ProduitRequest produitRequest, @PathVariable Integer id) {
 		if (id != produitRequest.getId() || !this.produitService.existById(id)) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
