@@ -57,7 +57,7 @@ public class AnimalRequest {
 	}
 	
 	public static Animal convert(AnimalRequest animalRequest) {
-		Animal animal = null;
+		Animal animal = new Animal();
 		
 		BeanUtils.copyProperties(animalRequest, animal);
 

@@ -33,7 +33,6 @@ public class ProduitRestController {
 	}
 
 	@GetMapping("")
-	@JsonView(Views.ViewProduit.class)
 	public List<ProduitResponse> getAll() {
 		List<Produit> produits = this.produitService.findAll();
 		
@@ -43,7 +42,6 @@ public class ProduitRestController {
 	}
 
 	@GetMapping("/{id}")
-	@JsonView(Views.ViewProduit.class)
 	public ProduitResponse getById(@PathVariable Integer id) {
 		Produit produit = this.produitService.findById(id);
 		
@@ -51,14 +49,12 @@ public class ProduitRestController {
 	}
 
 	@PostMapping("")
-	@JsonView(Views.ViewProduit.class)
 	public Produit create(@RequestBody ProduitRequest produitRequest) {
 		Produit produit = ProduitRequest.convert(produitRequest);
 		return this.produitService.create(produit);
 	}
 
 	@PutMapping("/{id}")
-	@JsonView(Views.ViewProduit.class)
 	public Produit update(@RequestBody ProduitRequest produitRequest, @PathVariable Integer id) {
 		if (id != produitRequest.getId() || !this.produitService.existById(id)) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");

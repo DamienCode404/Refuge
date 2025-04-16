@@ -3,7 +3,6 @@ package formation_sopra.Refuge.rest;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +17,6 @@ import formation_sopra.Refuge.dao.IDAOUtilisateur;
 import formation_sopra.Refuge.model.Utilisateur;
 import formation_sopra.Refuge.rest.request.UtilisateurRequest;
 import formation_sopra.Refuge.rest.response.UtilisateurResponse;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/utilisateur")
