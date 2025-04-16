@@ -7,7 +7,6 @@ import org.springframework.beans.BeanUtils;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation_sopra.Refuge.model.Achat;
-import formation_sopra.Refuge.model.Animal;
 import formation_sopra.Refuge.model.Views;
 import formation_sopra.Refuge.rest.request.AchatRequest;
 

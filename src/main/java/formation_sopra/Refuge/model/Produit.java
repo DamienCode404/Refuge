@@ -1,11 +1,14 @@
 package formation_sopra.Refuge.model;
 
+import java.util.Arrays;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +26,10 @@ public class Produit{
 	private Double prix;
 	@JsonView(Views.ViewProduit.class)
 	private Integer stock;
+	
+	@Lob
+	@JsonView(Views.ViewBasic.class)
+	private byte[] image;
 	
 	public Produit() {}
 	
@@ -73,9 +80,17 @@ public class Produit{
 		this.stock = stock;
 	}
 
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
 		return "Produit [id=" + id + ", libelle=" + libelle + ", description=" + description + ", prix=" + prix
-				+ ", stock=" + stock + "]";
+				+ ", stock=" + stock + ", image=" + Arrays.toString(image) + "]";
 	}
 }

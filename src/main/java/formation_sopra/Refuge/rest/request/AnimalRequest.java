@@ -12,7 +12,7 @@ public class AnimalRequest {
 	private String race;
 	private LocalDate naissance;
 	private String description;
-
+	
 	public AnimalRequest() {
 		super();	}
 
