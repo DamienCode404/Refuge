@@ -2,10 +2,15 @@ package formation_sopra.Refuge.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,11 +18,24 @@ import jakarta.persistence.Table;
 public class Animal{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewBasic.class)
 	private Integer id;
+	@JsonView(Views.ViewBasic.class)
 	private String nom;
+	@JsonView(Views.ViewBasic.class)
 	private String race;
+	@JsonView(Views.ViewBasic.class)
 	private LocalDate naissance;
+	@JsonView(Views.ViewBasic.class)
 	private String description;
+	
+	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewBasic.class)
+	private Statut status;
+	
+	@Lob
+	@JsonView(Views.ViewBasic.class)
+	private byte[] image;
 	
 	public Animal() {}
 	
@@ -58,10 +76,26 @@ public class Animal{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public Statut getStatus() {
+		return status;
+	}
+
+	public void setStatus(Statut status) {
+		this.status = status;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 
 	@Override
 	public String toString() {
-		return "Animal [id=" + id + ", nom=" + nom + ", race=" + race + ", naissance=" + naissance + ", description="
-				+ description + "]";
+		return "Animal [id=" + id + ", nom=" + nom + ", race=" + race + ", naissance=" + naissance + ", description=" + description
+				+ ", status=" + status + "]";
 	}
 }
