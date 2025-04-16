@@ -1,17 +1,22 @@
 package formation_sopra.Refuge.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import quest.model.Views;
 
 @Entity
 @Table(name="espece")
 public class Espece{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.ViewBasic.class)
 	private Integer id;
+	@JsonView(Views.ViewBasic.class)
 	private String libelle;
 	
 	public Espece() {}
