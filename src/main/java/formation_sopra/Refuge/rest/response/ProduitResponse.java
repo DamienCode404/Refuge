@@ -2,13 +2,21 @@ package formation_sopra.Refuge.rest.response;
 
 import org.springframework.beans.BeanUtils;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import formation_sopra.Refuge.model.Produit;
+import formation_sopra.Refuge.model.Views;
 
 public class ProduitResponse {
+	@JsonView(Views.ViewProduit.class)
 	private Integer id;
+	@JsonView(Views.ViewProduit.class)
 	private String libelle;
+	@JsonView(Views.ViewProduit.class)
 	private String description;
+	@JsonView(Views.ViewProduit.class)
 	private Double prix;
+	@JsonView(Views.ViewProduit.class)
 	private Integer stock;
 
 	public ProduitResponse() {

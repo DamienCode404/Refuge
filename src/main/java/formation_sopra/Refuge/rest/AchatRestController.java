@@ -16,7 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation_sopra.Refuge.dao.IDAOAchat;
-import formation_sopra.Refuge.dao.IDAOUtilisateur;
 import formation_sopra.Refuge.model.Achat;
 import formation_sopra.Refuge.model.Views;
 
@@ -26,7 +25,7 @@ public class AchatRestController {
 
 	private IDAOAchat daoAchat;
 	
-	public AchatRestController(IDAOUtilisateur daoUtilisateur) {
+	public AchatRestController(IDAOAchat daoAchat) {
 		super();
 		this.daoAchat = daoAchat;
 	}
