@@ -22,6 +22,8 @@ import formation_sopra.Refuge.rest.AchatRestController;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 
 
 @WebMvcTest(AchatRestController.class) // lance uniquement le test du controleur
@@ -49,6 +51,7 @@ public class AchatRestControllerTest {
         when(daoAchat.findAll()).thenReturn(List.of(achat)); //retour de la liste achat
 
         mockMvc.perform(get("/achat")) //envoie de la requete
+        		.andDo(print()) 
                 .andExpect(status().isOk())//verification statut + contenu
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].qte").value(5))
