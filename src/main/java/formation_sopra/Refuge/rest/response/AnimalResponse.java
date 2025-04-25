@@ -21,6 +21,8 @@ public class AnimalResponse {
 	private LocalDate naissance;
 	@JsonView(Views.ViewAnimal.class)
 	private String description;
+	@JsonView(Views.ViewAnimal.class)
+	private Integer idWorker;
 	
 	public AnimalResponse() {
 		super();
@@ -65,11 +67,19 @@ public class AnimalResponse {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public Integer getIdWorker() {
+		return idWorker;
+	}
+
+	public void setIdWorker(Integer idWorker) {
+		this.idWorker = idWorker;
+	}
 
 	public static AnimalResponse convert(Animal animal) {
+		System.out.println("animal" + animal.getIdWorker() );
 		AnimalResponse animalResponse = new AnimalResponse();
 		BeanUtils.copyProperties(animal, animalResponse);
-		
 		return animalResponse; 
 	}
 }

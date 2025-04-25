@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,6 +29,9 @@ public class Animal{
 	private LocalDate naissance;
 	@JsonView(Views.ViewBasic.class)
 	private String description;
+	@JsonView(Views.ViewBasic.class)
+	@Column(name="id_worker")
+	private Integer idWorker;
 	
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.ViewBasic.class)
@@ -39,11 +43,12 @@ public class Animal{
 	
 	public Animal() {}
 	
-	public Animal(String nom, String race, LocalDate naissance, String description) {
+	public Animal(String nom, String race, LocalDate naissance, String description, Integer idWorker) {
 		this.nom = nom;
 		this.race = race;
 		this.naissance = naissance;
 		this.description = description;
+		this.idWorker = idWorker;
 	}
 
 	public Integer getId() {
@@ -91,6 +96,14 @@ public class Animal{
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public Integer getIdWorker() {
+		return idWorker;
+	}
+
+	public void setIdWorker(Integer idWorker) {
+		this.idWorker = idWorker;
 	}
 
 	@Override
