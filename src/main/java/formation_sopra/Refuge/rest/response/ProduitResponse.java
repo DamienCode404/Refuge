@@ -1,5 +1,7 @@
 package formation_sopra.Refuge.rest.response;
 
+import java.util.Base64;
+
 import org.springframework.beans.BeanUtils;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -19,6 +21,9 @@ public class ProduitResponse {
 	@JsonView(Views.ViewProduit.class)
 	private Integer stock;
 
+	@JsonView(Views.ViewProduit.class)
+	private String imageBase64; 
+	 
 	public ProduitResponse() {
 		super();
 	}
@@ -67,6 +72,21 @@ public class ProduitResponse {
 		ProduitResponse produitResponse = new ProduitResponse();
 		BeanUtils.copyProperties(produit, produitResponse);
 		
+		
+		   
+	    if (produit.getImage() != null) {
+	        byte[] imageBytes = produit.getImage();  // Récupérer l'image en tant que tableau de bytes
+	        String base64Image = Base64.getEncoder().encodeToString(imageBytes); // Convertir en base64
+	        produitResponse.setImageBase64(base64Image); // Ajouter l'image encodée au DTO
+	    }
 		return produitResponse;
+	}
+
+	public String getImageBase64() {
+		return imageBase64;
+	}
+
+	public void setImageBase64(String imageBase64) {
+		this.imageBase64 = imageBase64;
 	}
 }

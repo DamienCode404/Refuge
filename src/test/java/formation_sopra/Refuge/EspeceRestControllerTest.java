@@ -42,7 +42,7 @@ public class EspeceRestControllerTest {
 
     @BeforeEach
     public void setUp() {
-        espece = new Espece("Guépard");
+        espece = new Espece("Grenouille");
         espece.setId(1);
     }
 
@@ -53,7 +53,7 @@ public class EspeceRestControllerTest {
         mockMvc.perform(get("/espece"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].libelle").value("Guépard"));
+                .andExpect(jsonPath("$[0].libelle").value("Grenouille"));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class EspeceRestControllerTest {
         mockMvc.perform(get("/espece/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.libelle").value("Guépard"));
+                .andExpect(jsonPath("$.libelle").value("Grenouille"));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class EspeceRestControllerTest {
                 .content(objectMapper.writeValueAsString(espece)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.libelle").value("Guépard"));
+                .andExpect(jsonPath("$.libelle").value("Grenouille"));
     }
 
     @Test
@@ -113,7 +113,7 @@ public class EspeceRestControllerTest {
     @Test
     public void testUpdateEspece_IncoherentId() throws Exception {
         Espece incoherent = new Espece("Panthère");
-        incoherent.setId(2); // différent de l'ID de l'URL
+        incoherent.setId(2);
 
         mockMvc.perform(put("/espece/1")
                 .contentType(MediaType.APPLICATION_JSON)
