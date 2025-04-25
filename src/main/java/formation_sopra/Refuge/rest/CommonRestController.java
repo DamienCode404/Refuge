@@ -14,7 +14,6 @@ import formation_sopra.Refuge.rest.request.ConnexionRequest;
 import formation_sopra.Refuge.rest.response.ConnexionResponse;
 
 @RestController
-@RequestMapping("/api")
 public class CommonRestController {
 
 
