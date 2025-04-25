@@ -27,10 +27,9 @@ public class SecurityConfig {
 
 		// Autorisations sur URLs
 		http.authorizeHttpRequests(auth -> {
+			auth.requestMatchers("/api/inscription").permitAll();
 			auth.requestMatchers("/api/connexion").permitAll();
 			auth.requestMatchers("/api/utilisateur/**").hasRole("ADMIN");
-			auth.requestMatchers("/api/animal/**").hasRole("ADMIN");
-			
 //			auth.requestMatchers("/api/utilisateur/**").hasAuthority("ROLE_ADMIN");
 			auth.requestMatchers("/api/**").authenticated();
 			auth.requestMatchers("/**").permitAll();
