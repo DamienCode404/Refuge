@@ -1,5 +1,8 @@
 package formation_sopra.Refuge.rest.request;
 
+import java.util.Base64;
+import java.util.stream.Stream;
+
 import org.springframework.beans.BeanUtils;
 
 import formation_sopra.Refuge.model.Produit;
@@ -10,6 +13,15 @@ public class ProduitRequest {
 	private String description;
 	private Double prix;
 	private Integer stock;
+	private String imageBase64;
+
+	public String getImageBase64() {
+		return imageBase64;
+	}
+
+	public void setImageBase64(String imageBase64) {
+		this.imageBase64 = imageBase64;
+	}
 
 	public ProduitRequest() {
 		super();
@@ -58,6 +70,12 @@ public class ProduitRequest {
 	public static Produit convert(ProduitRequest produitRequest) {
 		Produit produit = new Produit();
 		BeanUtils.copyProperties(produitRequest, produit);
+		
+		//Base64 vers byte 
+		var b64 = produitRequest.getImageBase64();
+		var split = Stream.of(b64.split(",")).toList().getLast();
+		byte[] decode = Base64.getDecoder().decode(split);
+		produit.setImage(decode);
 		
 		return produit;
 	}
