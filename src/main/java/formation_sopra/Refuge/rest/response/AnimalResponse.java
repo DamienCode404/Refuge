@@ -77,7 +77,6 @@ public class AnimalResponse {
 	}
 
 	public static AnimalResponse convert(Animal animal) {
-		System.out.println("animal" + animal.getIdWorker() );
 		AnimalResponse animalResponse = new AnimalResponse();
 		BeanUtils.copyProperties(animal, animalResponse);
 		return animalResponse; 
