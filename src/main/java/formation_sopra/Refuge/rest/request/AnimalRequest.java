@@ -12,6 +12,7 @@ public class AnimalRequest {
 	private String race;
 	private LocalDate naissance;
 	private String description;
+	private Integer idWorker;
 	
 	public AnimalRequest() {
 		super();	}
@@ -56,6 +57,14 @@ public class AnimalRequest {
 		this.description = description;
 	}
 	
+	public Integer getIdWorker() {
+		return idWorker;
+	}
+
+	public void setIdWorker(Integer idWorker) {
+		this.idWorker = idWorker;
+	}
+
 	public static Animal convert(AnimalRequest animalRequest) {
 		Animal animal = new Animal();
 		
