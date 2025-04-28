@@ -78,7 +78,6 @@ public class AnimalRequest {
 
 	public static Animal convert(AnimalRequest animalRequest) {
 		Animal animal = new Animal();
-		
 		BeanUtils.copyProperties(animalRequest, animal);
 		
 		//Base64 vers byte 
