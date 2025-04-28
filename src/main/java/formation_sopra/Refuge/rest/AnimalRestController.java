@@ -35,15 +35,16 @@ public class AnimalRestController {
 		this.animalService = animalService;
 	}
 
+    @GetMapping("")
+    @JsonView(Views.ViewAnimal.class)
+    public List<AnimalResponse> getAll() {
+        List<Animal> animals = this.animalService.findAll();
+        return animals.stream()
+                      .map(AnimalResponse::convert)
+                      .toList();
+    }
 
-	@GetMapping("")
-	@JsonView(Views.ViewAnimal.class)
-	public List<AnimalResponse> getAll() {
-		List<Animal> animals = this.animalService.findAll();
 
-		return animals.stream().map(AnimalResponse::convert).toList();
-	}
-	
 	
 	@GetMapping("/{id}")
 	@JsonView(Views.ViewAnimal.class)

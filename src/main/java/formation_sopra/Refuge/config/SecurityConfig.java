@@ -27,20 +27,15 @@ public class SecurityConfig {
 
 		// Autorisations sur URLs
 		http.authorizeHttpRequests(auth -> {
-			//auth.requestMatchers("/api/animal/**").permitAll();
+		    auth.requestMatchers("/api/animal/**").permitAll(); // Public : pas besoin de token
 
-			auth.requestMatchers("/api/inscription").permitAll();
-			auth.requestMatchers("/api/connexion").permitAll();
-			auth.requestMatchers("/api/utilisateur/**").hasRole("ADMIN");
+		    auth.requestMatchers("/api/connexion").authenticated(); // Token obligatoire
+		    auth.requestMatchers("/api/inscription").authenticated(); // Token obligatoire
 
-//			auth.requestMatchers("/api/utilisateur/**").hasAuthority("ROLE_ADMIN");
-
-			auth.requestMatchers("/api/animal/**").hasRole("ADMIN");
-			
-			auth.requestMatchers("/api/utilisateur/**").hasAuthority("ROLE_ADMIN");
-
-			auth.requestMatchers("/api/**").authenticated();
-			auth.requestMatchers("/**").permitAll();
+		    auth.requestMatchers("/api/utilisateur/**").hasRole("ADMIN"); // Admin obligatoire
+		    auth.requestMatchers("/api/admin/**").hasRole("ADMIN"); // Admin obligatoire
+		    auth.requestMatchers("/api/**").authenticated(); // tout le reste : connecté
+		    auth.requestMatchers("/**").permitAll(); // le reste du site (non /api) public
 		});
 
 		http.csrf(c -> c.ignoringRequestMatchers("/**"));

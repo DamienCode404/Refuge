@@ -13,7 +13,7 @@ public interface IDAOAnimal extends JpaRepository<Animal,Integer>{
 	@Query("from Animal")
 	public List<Animal> findAllAnimal();
 	
- 
+
 
 }
 	

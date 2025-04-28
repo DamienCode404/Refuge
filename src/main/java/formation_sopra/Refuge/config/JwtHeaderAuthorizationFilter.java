@@ -33,12 +33,16 @@ public class JwtHeaderAuthorizationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String authHeader = request.getHeader("Authorization");
-		String token = null;
 
-		if (authHeader != null) {
-			token = authHeader.substring(7); // On retire "Bearer " qui fait 7 caractères
-		}
+		//pour eviter l'erreur du token vide lors de la deconnexion, pour ne pas avoir de casse serveur
+	    // pour permettre d'aller a l'accueil d'un visiteur non connecté, pas de verification de token nécessaire
+	    if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+	        filterChain.doFilter(request, response);
+	        return;
+	    }
 
+	    String token = authHeader.substring(7);
+	    
 		Optional<String> optUsername = JwtUtil.getUsername(token);
 
 		// Si on a le nom d'utilisateur, le jeton est valide
