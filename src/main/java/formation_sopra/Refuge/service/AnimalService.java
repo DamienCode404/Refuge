@@ -49,10 +49,7 @@ public class AnimalService {
 		return true;
 	}
 	
-	public List<Animal> findAllByRace(String race)
-	{
-		return daoAnimal.findAllByRace(race);
-	}
+	
 
 
 }

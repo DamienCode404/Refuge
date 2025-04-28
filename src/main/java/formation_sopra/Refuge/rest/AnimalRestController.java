@@ -35,6 +35,7 @@ public class AnimalRestController {
 		this.animalService = animalService;
 	}
 
+
 	@GetMapping("")
 	@JsonView(Views.ViewAnimal.class)
 	public List<AnimalResponse> getAll() {
@@ -43,11 +44,6 @@ public class AnimalRestController {
 		return animals.stream().map(AnimalResponse::convert).toList();
 	}
 	
-
-
-	    List<Animal> animaux = this.animalService.findAllByRace(race);
-	    return animaux.stream().map(AnimalResponse::convert).toList();
-	}
 	
 	@GetMapping("/{id}")
 	@JsonView(Views.ViewAnimal.class)
