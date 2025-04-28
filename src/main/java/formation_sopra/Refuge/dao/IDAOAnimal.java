@@ -13,8 +13,7 @@ public interface IDAOAnimal extends JpaRepository<Animal,Integer>{
 	@Query("from Animal")
 	public List<Animal> findAllAnimal();
 	
-    @Query("SELECT a FROM Animal a WHERE a.race LIKE %:race%")
-    public List<Animal> findAllByRace(@Param("race") String race);
+ 
 
 }
 	
