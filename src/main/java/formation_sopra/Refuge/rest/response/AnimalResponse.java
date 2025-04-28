@@ -1,6 +1,7 @@
 package formation_sopra.Refuge.rest.response;
 
 import java.time.LocalDate;
+import java.util.Base64;
 
 import org.springframework.beans.BeanUtils;
 
@@ -23,6 +24,8 @@ public class AnimalResponse {
 	private String description;
 	@JsonView(Views.ViewAnimal.class)
 	private Integer idWorker;
+	@JsonView(Views.ViewProduit.class)
+	private String imageBase64;
 	
 	public AnimalResponse() {
 		super();
@@ -75,10 +78,24 @@ public class AnimalResponse {
 	public void setIdWorker(Integer idWorker) {
 		this.idWorker = idWorker;
 	}
+	
+	public String getImageBase64() {
+		return imageBase64;
+	}
 
+	public void setImageBase64(String imageBase64) {
+		this.imageBase64 = imageBase64;
+	}
+	
 	public static AnimalResponse convert(Animal animal) {
 		AnimalResponse animalResponse = new AnimalResponse();
 		BeanUtils.copyProperties(animal, animalResponse);
+		
+	    if (animal.getImage() != null) {
+	        byte[] imageBytes = animal.getImage();  // Récupérer l'image en tant que tableau de bytes
+	        String base64Image = Base64.getEncoder().encodeToString(imageBytes); // Convertir en base64
+	        animalResponse.setImageBase64(base64Image); // Ajouter l'image encodée au DTO
+	    }
 		return animalResponse; 
 	}
 }

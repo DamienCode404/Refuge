@@ -1,5 +1,7 @@
 package formation_sopra.Refuge.model;
 
+import java.util.Arrays;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.DiscriminatorColumn;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,6 +35,9 @@ public abstract class Utilisateur{
 	protected String email;
 	@JsonView(Views.ViewBasic.class)
 	protected String phoneNumber;
+	@Lob
+	@JsonView(Views.ViewBasic.class)
+	private byte[] image;
 	
 	public Utilisateur() {}
 	
@@ -99,11 +105,20 @@ public abstract class Utilisateur{
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 
 	@Override
 	public String toString() {
 		return "Utilisateur [id=" + id + ", login=" + login + ", password=" + password + ", lastName=" + lastName
-				+ ", firstName=" + firstName + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
+				+ ", firstName=" + firstName + ", email=" + email + ", phoneNumber=" + phoneNumber + ", image="
+				+ Arrays.toString(image) + "]";
 	}
 	
 }
