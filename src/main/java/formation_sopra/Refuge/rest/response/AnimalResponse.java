@@ -26,6 +26,8 @@ public class AnimalResponse {
 	private Integer idWorker;
 	@JsonView(Views.ViewAnimal.class)
 	private String imageBase64;
+	@JsonView(Views.ViewAnimal.class)
+	private String statut;
 	
 	public AnimalResponse() {
 		super();
@@ -67,6 +69,16 @@ public class AnimalResponse {
 		return description;
 	}
 
+	
+
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -90,6 +102,10 @@ public class AnimalResponse {
 	public static AnimalResponse convert(Animal animal) {
 		AnimalResponse animalResponse = new AnimalResponse();
 		BeanUtils.copyProperties(animal, animalResponse);
+		
+		if (animal.getStatut() != null) {
+	        animalResponse.setStatut(animal.getStatut().toString());
+	    }
 		
 	    if (animal.getImage() != null) {
 	        byte[] imageBytes = animal.getImage();  // Récupérer l'image en tant que tableau de bytes

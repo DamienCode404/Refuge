@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import org.springframework.beans.BeanUtils;
 
 import formation_sopra.Refuge.model.Animal;
+import formation_sopra.Refuge.model.Statut;
 
 public class AnimalRequest {
 	private Integer id;
@@ -14,11 +15,13 @@ public class AnimalRequest {
 	private String race;
 	private LocalDate naissance;
 	private String description;
+	private String statut;
 	private Integer idWorker;
 	private String imageBase64;
-	
+
 	public AnimalRequest() {
-		super();	}
+		super();
+	}
 
 	public String getImageBase64() {
 		return imageBase64;
@@ -27,7 +30,7 @@ public class AnimalRequest {
 	public void setImageBase64(String imageBase64) {
 		this.imageBase64 = imageBase64;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -67,7 +70,15 @@ public class AnimalRequest {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
 	public Integer getIdWorker() {
 		return idWorker;
 	}
@@ -79,18 +90,19 @@ public class AnimalRequest {
 	public static Animal convert(AnimalRequest animalRequest) {
 		Animal animal = new Animal();
 		BeanUtils.copyProperties(animalRequest, animal);
-		
-		//Base64 vers byte 
-		if (animalRequest.getImageBase64() == null)
-		{
-			return animal;
+
+		if (animalRequest.getStatut() != null) {
+			animal.setStatut(Statut.valueOf(animalRequest.getStatut()));
 		}
-		
-		var b64 = animalRequest.getImageBase64();
-		var split = Stream.of(b64.split(",")).toList().getLast();
-		byte[] decode = Base64.getDecoder().decode(split);
-		animal.setImage(decode);
-		
+
+		// Base64 vers byte
+		if (animalRequest.getImageBase64() != null) {
+			var b64 = animalRequest.getImageBase64();
+			var split = Stream.of(b64.split(",")).toList().getLast();
+			byte[] decode = Base64.getDecoder().decode(split);
+			animal.setImage(decode);
+		}
+
 		return animal;
 	}
 }
