@@ -24,7 +24,7 @@ public class AnimalResponse {
 	private String description;
 	@JsonView(Views.ViewAnimal.class)
 	private Integer idWorker;
-	@JsonView(Views.ViewProduit.class)
+	@JsonView(Views.ViewAnimal.class)
 	private String imageBase64;
 	
 	public AnimalResponse() {

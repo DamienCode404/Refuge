@@ -15,11 +15,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import formation_sopra.Refuge.dao.IDAOAnimal;
 import formation_sopra.Refuge.model.Animal;
 import formation_sopra.Refuge.model.Views;
 import formation_sopra.Refuge.rest.request.AnimalRequest;
 import formation_sopra.Refuge.rest.response.AnimalResponse;
+import formation_sopra.Refuge.service.AnimalService;
 
 
 @RestController
@@ -27,17 +27,17 @@ import formation_sopra.Refuge.rest.response.AnimalResponse;
 
 public class AnimalRestController {
 	
-	private IDAOAnimal daoAnimal;
+	private AnimalService animalService;
 	
-	public AnimalRestController(IDAOAnimal daoAnimal) {
+	public AnimalRestController(AnimalService animalService) {
 		super();
-		this.daoAnimal = daoAnimal;
+		this.animalService = animalService;
 	}
 
 	@GetMapping("")
 	@JsonView(Views.ViewAnimal.class)
 	public List<AnimalResponse> getAll() {
-		List<Animal> animals = this.daoAnimal.findAll();
+		List<Animal> animals = this.animalService.findAll();
 
 		return animals.stream().map(AnimalResponse::convert).toList();
 	}
@@ -45,38 +45,37 @@ public class AnimalRestController {
 	@GetMapping("/{id}")
 	@JsonView(Views.ViewAnimal.class)
 	public AnimalResponse getById(@PathVariable Integer id) {
-		return this.daoAnimal.findById(id).map(AnimalResponse::convert)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		Animal animal = this.animalService.findById(id);
+		return AnimalResponse.convert(animal);
 	}
 	
 	@PostMapping("")
 	@JsonView(Views.ViewAnimal.class)
 	public Animal create(@RequestBody AnimalRequest animalRequest) {
 		Animal animal = AnimalRequest.convert(animalRequest);
-
-		return daoAnimal.save(animal);
+		return this.animalService.create(animal);
 	}
 	
 	@PutMapping("/{id}")
 	@JsonView(Views.ViewAnimal.class)
 	public Animal update(@RequestBody AnimalRequest animalRequest, @PathVariable Integer id) {
-		if (id != animalRequest.getId() || !this.daoAnimal.existsById(id)) {
+		if (id != animalRequest.getId() || !this.animalService.existById(id)) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incohérence de l'appel");
 		}
 
 		Animal animal = AnimalRequest.convert(animalRequest);
 
-		return daoAnimal.save(animal);
+		return this.animalService.update(animal);
 	}
 	
 	@DeleteMapping("/{id}")
 	@JsonView(Views.ViewAnimal.class)
 	public void delete(@PathVariable Integer id) {
-		if (!this.daoAnimal.existsById(id)) {
+		if (!this.animalService.existById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Non trouvé");
 		}
 
-		this.daoAnimal.deleteById(id);
+		this.animalService.deleteById(id);
 	}
 
 }
