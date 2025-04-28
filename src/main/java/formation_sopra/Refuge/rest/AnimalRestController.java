@@ -44,6 +44,10 @@ public class AnimalRestController {
 	}
 	
 
+
+	    List<Animal> animaux = this.animalService.findAllByRace(race);
+	    return animaux.stream().map(AnimalResponse::convert).toList();
+	}
 	
 	@GetMapping("/{id}")
 	@JsonView(Views.ViewAnimal.class)

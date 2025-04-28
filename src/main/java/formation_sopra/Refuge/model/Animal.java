@@ -35,7 +35,7 @@ public class Animal{
 	
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.ViewBasic.class)
-	private Statut status;
+	private Statut statut;
 	
 	@Lob
 	@JsonView(Views.ViewBasic.class)
@@ -82,12 +82,12 @@ public class Animal{
 		this.description = description;
 	}
 	
-	public Statut getStatus() {
-		return status;
+	public Statut getStatut() {
+		return statut;
 	}
 
-	public void setStatus(Statut status) {
-		this.status = status;
+	public void setStatut(Statut statut) {
+		this.statut = statut;
 	}
 
 	public byte[] getImage() {
@@ -109,6 +109,6 @@ public class Animal{
 	@Override
 	public String toString() {
 		return "Animal [id=" + id + ", nom=" + nom + ", race=" + race + ", naissance=" + naissance + ", description=" + description
-				+ ", status=" + status + "]";
+				+ ", statut=" + statut + "]";
 	}
 }
