@@ -9,7 +9,7 @@ import formation_sopra.Refuge.dao.IDAOUtilisateur;
 import formation_sopra.Refuge.model.Client;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/inscription")
 public class InscriptionRestController {
 
     private final IDAOUtilisateur daoUtilisateur;
@@ -18,7 +18,7 @@ public class InscriptionRestController {
         this.daoUtilisateur = daoUtilisateur;
     }
 
-    @PostMapping("/inscription")
+    @PostMapping("")
     public Client inscrire(@RequestBody Client client) {
         return daoUtilisateur.save(client);
     }
