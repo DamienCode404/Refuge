@@ -28,6 +28,8 @@ public class AnimalResponse {
 	private String imageBase64;
 	@JsonView(Views.ViewAnimal.class)
 	private String statut;
+	@JsonView(Views.ViewAnimal.class)
+	private String tag;
 	
 	public AnimalResponse() {
 		super();
@@ -69,7 +71,13 @@ public class AnimalResponse {
 		return description;
 	}
 
+	public String getTag() {
+		return tag;
+	}
 	
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 
 	public String getStatut() {
 		return statut;
@@ -106,6 +114,10 @@ public class AnimalResponse {
 		if (animal.getStatut() != null) {
 	        animalResponse.setStatut(animal.getStatut().toString());
 	    }
+		
+		if (animal.getTag() != null) {
+			animalResponse.setTag(animal.getTag().toString());
+		}
 		
 	    if (animal.getImage() != null) {
 	        byte[] imageBytes = animal.getImage();  // Récupérer l'image en tant que tableau de bytes

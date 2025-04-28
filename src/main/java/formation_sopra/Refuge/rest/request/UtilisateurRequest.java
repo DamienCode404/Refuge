@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 
 import formation_sopra.Refuge.model.Admin;
 import formation_sopra.Refuge.model.Client;
+import formation_sopra.Refuge.model.Tag;
 import formation_sopra.Refuge.model.Utilisateur;
 import formation_sopra.Refuge.model.Worker;
 
@@ -20,7 +21,8 @@ public class UtilisateurRequest {
 	private String phoneNumber;
 	private UtilisateurType utilisateurType;
 	private String imageBase64;
-
+	private String tag;
+	
 	public String getImageBase64() {
 		return imageBase64;
 	}
@@ -97,6 +99,14 @@ public class UtilisateurRequest {
 		this.utilisateurType = utilisateurType;
 	}
 
+	public String getTag() {
+		return tag;
+	}
+	
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	
 	public static Utilisateur convert(UtilisateurRequest utilisateurRequest) {
 		Utilisateur utilisateur = null;
 		if(utilisateurRequest.getUtilisateurType() == UtilisateurType.ADMIN) {
@@ -109,11 +119,17 @@ public class UtilisateurRequest {
 		
 		BeanUtils.copyProperties(utilisateurRequest, utilisateur);
 		
+		if (utilisateurRequest.getTag() != null) {
+			utilisateur.setTag(Tag.valueOf(utilisateurRequest.getTag()));
+		}
+		
 		//Base64 vers byte 
-		var b64 = utilisateurRequest.getImageBase64();
-		var split = Stream.of(b64.split(",")).toList().getLast();
-		byte[] decode = Base64.getDecoder().decode(split);
-		utilisateur.setImage(decode);
+		if (utilisateurRequest.getImageBase64() != null) {
+			var b64 = utilisateurRequest.getImageBase64();
+			var split = Stream.of(b64.split(",")).toList().getLast();
+			byte[] decode = Base64.getDecoder().decode(split);
+			utilisateur.setImage(decode);
+		}
 		
 		return utilisateur;
 	}

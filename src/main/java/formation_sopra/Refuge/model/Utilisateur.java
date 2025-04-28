@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,6 +41,18 @@ public abstract class Utilisateur{
 	@JsonView(Views.ViewBasic.class)
 	private byte[] image;
 	
+	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewBasic.class)
+	private Tag tag;
+	
+	public Tag getTag() {
+		return tag;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
+	}
+
 	public Utilisateur() {}
 	
 	public Utilisateur(String login, String password, String lastName, String firstName, String email, String phoneNumber) {
@@ -118,7 +132,7 @@ public abstract class Utilisateur{
 	public String toString() {
 		return "Utilisateur [id=" + id + ", login=" + login + ", password=" + password + ", lastName=" + lastName
 				+ ", firstName=" + firstName + ", email=" + email + ", phoneNumber=" + phoneNumber + ", image="
-				+ Arrays.toString(image) + "]";
+				+ Arrays.toString(image) + ", tag=" + tag + "]";
 	}
 	
 }
