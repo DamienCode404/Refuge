@@ -1,5 +1,7 @@
 package formation_sopra.Refuge.rest.response;
 
+import java.util.Base64;
+
 import org.springframework.beans.BeanUtils;
 
 import formation_sopra.Refuge.model.Admin;
@@ -16,7 +18,8 @@ public class UtilisateurResponse {
 	private String email;
 	private String phoneNumber;
 	private UtilisateurType utilisateurType;
-
+	private String imageBase64; 
+	
 	public UtilisateurResponse() {
 		super();
 	}
@@ -84,7 +87,15 @@ public class UtilisateurResponse {
 	public void setUtilisateurType(UtilisateurType utilisateurType) {
 		this.utilisateurType = utilisateurType;
 	}
+	
+	public String getImageBase64() {
+		return imageBase64;
+	}
 
+	public void setImageBase64(String imageBase64) {
+		this.imageBase64 = imageBase64;
+	}
+	
 	public static UtilisateurResponse convert(Utilisateur utilisateur) {
 		UtilisateurResponse utilisateurResponse = new UtilisateurResponse();
 		BeanUtils.copyProperties(utilisateur, utilisateurResponse);
@@ -99,6 +110,11 @@ public class UtilisateurResponse {
 			utilisateurResponse.setUtilisateurType(UtilisateurType.ADMIN);
 		}
 		
+	    if (utilisateur.getImage() != null) {
+	        byte[] imageBytes = utilisateur.getImage();  // Récupérer l'image en tant que tableau de bytes
+	        String base64Image = Base64.getEncoder().encodeToString(imageBytes); // Convertir en base64
+	        utilisateurResponse.setImageBase64(base64Image); // Ajouter l'image encodée au DTO
+	    }
 		return utilisateurResponse; 
 	}
 	

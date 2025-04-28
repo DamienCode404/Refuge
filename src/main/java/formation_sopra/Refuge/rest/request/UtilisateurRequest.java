@@ -1,5 +1,8 @@
 package formation_sopra.Refuge.rest.request;
 
+import java.util.Base64;
+import java.util.stream.Stream;
+
 import org.springframework.beans.BeanUtils;
 
 import formation_sopra.Refuge.model.Admin;
@@ -16,7 +19,16 @@ public class UtilisateurRequest {
 	private String email;
 	private String phoneNumber;
 	private UtilisateurType utilisateurType;
+	private String imageBase64;
 
+	public String getImageBase64() {
+		return imageBase64;
+	}
+
+	public void setImageBase64(String imageBase64) {
+		this.imageBase64 = imageBase64;
+	}
+	
 	public UtilisateurRequest() {
 		super();
 	}
@@ -96,6 +108,12 @@ public class UtilisateurRequest {
 		}
 		
 		BeanUtils.copyProperties(utilisateurRequest, utilisateur);
+		
+		//Base64 vers byte 
+		var b64 = utilisateurRequest.getImageBase64();
+		var split = Stream.of(b64.split(",")).toList().getLast();
+		byte[] decode = Base64.getDecoder().decode(split);
+		utilisateur.setImage(decode);
 		
 		return utilisateur;
 	}
