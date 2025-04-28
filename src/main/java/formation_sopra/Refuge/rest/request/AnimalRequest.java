@@ -81,6 +81,11 @@ public class AnimalRequest {
 		BeanUtils.copyProperties(animalRequest, animal);
 		
 		//Base64 vers byte 
+		if (animalRequest.getImageBase64() == null)
+		{
+			return animal;
+		}
+		
 		var b64 = animalRequest.getImageBase64();
 		var split = Stream.of(b64.split(",")).toList().getLast();
 		byte[] decode = Base64.getDecoder().decode(split);

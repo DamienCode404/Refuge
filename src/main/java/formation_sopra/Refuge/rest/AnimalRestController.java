@@ -50,7 +50,7 @@ public class AnimalRestController {
 	        return List.of(); // retourne une liste vide
 	    }
 
-	    List<Animal> animaux = daoAnimal.findAllByRace(race);
+	    List<Animal> animaux = this.animalService.findAllByRace(race);
 	    return animaux.stream().map(AnimalResponse::convert).toList();
 	}
 	
