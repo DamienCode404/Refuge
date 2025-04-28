@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -40,6 +41,17 @@ public class AnimalRestController {
 		List<Animal> animals = this.daoAnimal.findAll();
 
 		return animals.stream().map(AnimalResponse::convert).toList();
+	}
+	
+	@GetMapping("/search")
+	@JsonView(Views.ViewAnimal.class)
+	public List<AnimalResponse> search(@RequestParam String race) {
+	    if (race == null || race.isEmpty()) {
+	        return List.of(); // retourne une liste vide
+	    }
+
+	    List<Animal> animaux = daoAnimal.findAllByRace(race);
+	    return animaux.stream().map(AnimalResponse::convert).toList();
 	}
 	
 	@GetMapping("/{id}")
