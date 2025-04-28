@@ -1,6 +1,7 @@
 package formation_sopra.Refuge.model;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -36,6 +37,10 @@ public class Animal{
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.ViewBasic.class)
 	private Statut statut;
+	
+	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewBasic.class)
+	private Tag tag;
 	
 	@Lob
 	@JsonView(Views.ViewBasic.class)
@@ -90,6 +95,14 @@ public class Animal{
 		this.statut = statut;
 	}
 
+	public Tag getTag() {
+		return tag;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
+	}
+	
 	public byte[] getImage() {
 		return image;
 	}
@@ -108,7 +121,8 @@ public class Animal{
 
 	@Override
 	public String toString() {
-		return "Animal [id=" + id + ", nom=" + nom + ", race=" + race + ", naissance=" + naissance + ", description=" + description
-				+ ", statut=" + statut + "]";
+		return "Animal [id=" + id + ", nom=" + nom + ", race=" + race + ", naissance=" + naissance + ", description="
+				+ description + ", idWorker=" + idWorker + ", statut=" + statut + ", tag=" + tag + ", image="
+				+ Arrays.toString(image) + "]";
 	}
 }

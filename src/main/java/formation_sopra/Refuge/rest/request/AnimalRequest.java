@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 
 import formation_sopra.Refuge.model.Animal;
 import formation_sopra.Refuge.model.Statut;
+import formation_sopra.Refuge.model.Tag;
 
 public class AnimalRequest {
 	private Integer id;
@@ -16,6 +17,7 @@ public class AnimalRequest {
 	private LocalDate naissance;
 	private String description;
 	private String statut;
+	private String tag;
 	private Integer idWorker;
 	private String imageBase64;
 
@@ -78,7 +80,15 @@ public class AnimalRequest {
 	public void setStatut(String statut) {
 		this.statut = statut;
 	}
-
+	
+	public String getTag() {
+		return tag;
+	}
+	
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	
 	public Integer getIdWorker() {
 		return idWorker;
 	}
@@ -95,6 +105,10 @@ public class AnimalRequest {
 			animal.setStatut(Statut.valueOf(animalRequest.getStatut()));
 		}
 
+		if (animalRequest.getTag() != null) {
+			animal.setTag(Tag.valueOf(animalRequest.getTag()));
+		}
+		
 		// Base64 vers byte
 		if (animalRequest.getImageBase64() != null) {
 			var b64 = animalRequest.getImageBase64();

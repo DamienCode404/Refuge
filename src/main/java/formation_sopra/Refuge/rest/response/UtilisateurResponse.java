@@ -18,7 +18,8 @@ public class UtilisateurResponse {
 	private String email;
 	private String phoneNumber;
 	private UtilisateurType utilisateurType;
-	private String imageBase64; 
+	private String imageBase64;
+	private String tag;
 	
 	public UtilisateurResponse() {
 		super();
@@ -96,6 +97,14 @@ public class UtilisateurResponse {
 		this.imageBase64 = imageBase64;
 	}
 	
+	public String getTag() {
+		return tag;
+	}
+	
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	
 	public static UtilisateurResponse convert(Utilisateur utilisateur) {
 		UtilisateurResponse utilisateurResponse = new UtilisateurResponse();
 		BeanUtils.copyProperties(utilisateur, utilisateurResponse);
@@ -108,6 +117,10 @@ public class UtilisateurResponse {
 			
 		} else if(utilisateur instanceof Admin) {
 			utilisateurResponse.setUtilisateurType(UtilisateurType.ADMIN);
+		}
+		
+		if (utilisateur.getTag() != null) {
+			utilisateurResponse.setTag(utilisateur.getTag().toString());
 		}
 		
 	    if (utilisateur.getImage() != null) {
