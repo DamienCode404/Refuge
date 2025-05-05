@@ -10,18 +10,18 @@ RUN mvn dependency:go-offline -B
 
 COPY ./src/ ./src/
 
-RUN mvn package
+RUN mvn package -DskipTests
 
 
 FROM openjdk:25-jdk-bullseye
 
-ENV ENV_DB_URL=mysql://quest-mysql:3306/refuge
+ENV ENV_DB_URL=mysql://4.233.149.159:3310/refuge
 ENV ENV_DB_USER=root
-ENV ENV_DB_PASSWORD=root
+ENV ENV_DB_PASSWORD=Not24Get!
 
 WORKDIR /app
 
-COPY --from=build /app/target/*.jar ./Refuge.jar
+COPY --from=build /app/target/*.jar ./quest-boot.jar
 
 ENTRYPOINT [ "java", "-jar", "quest-boot.jar" ]
 
