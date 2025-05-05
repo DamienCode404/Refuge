@@ -21,7 +21,7 @@ ENV ENV_DB_PASSWORD=root
 
 WORKDIR /app
 
-COPY --from=build /app/target/*.jar ./quest-boot.jar
+COPY --from=build /app/target/*.jar ./Refuge.jar
 
 ENTRYPOINT [ "java", "-jar", "quest-boot.jar" ]
 
